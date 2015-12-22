@@ -14,7 +14,7 @@ cd onionshare
 Note that python-stem appears in Debian wheezy and newer (so by extension Tails 1.1 and newer), and it appears in Ubuntu 13.10 and newer. Older versions of Debian and Ubuntu aren't supported.
 
 ```sh
-sudo apt-get install -y build-essential fakeroot python-all python-stdeb python-flask python-stem python-qt4 dh-python
+sudo apt-get install -y build-essential fakeroot python-all python-stdeb python-flask python-stem python-qt4 python-crypto dh-python
 ./install/build_deb.sh
 sudo dpkg -i deb_dist/onionshare_*.deb
 ```
@@ -22,7 +22,7 @@ sudo dpkg -i deb_dist/onionshare_*.deb
 *For .rpm-based distros (Red Hat, Fedora, CentOS):*
 
 ```sh
-sudo yum install -y rpm-build python-flask python-stem pyqt4
+sudo yum install -y rpm-build python-flask python-stem pyqt4 python-crypto
 ./install/build_rpm.sh
 sudo yum install -y dist/onionshare-*.rpm
 ```
@@ -43,7 +43,7 @@ The first time you're setting up your dev environment:
 echo export PYTHONPATH=\$PYTHONPATH:/usr/local/lib/python2.7/site-packages/ >> ~/.profile
 source ~/.profile
 brew install qt4 pyqt
-sudo pip install py2app flask stem
+sudo pip install py2app flask stem pycrypto
 ```
 
 Get the source code:
@@ -77,7 +77,7 @@ Now you should have `dist/OnionShare.pkg`.
 * Go to Start and type "advanced system settings", and open "View advanced system settings" in the Control Panel. Click Environment Variables. Under "System variables" double-click on Path, and add `C:\Python27` and `C:\Python27\Scripts`. Now you can just type `python` to run python scripts in the command prompt.
 * Go to https://pip.pypa.io/en/latest/installing.html. Right-click on `get-pip.py` and Save Link As, and save it to your home folder.
 * Open a command prompt and type: `python get-pip.py`. Now you can use `pip` to install packages.
-* Open a command prompt and type: `pip install flask stem pyinstaller`
+* Open a command prompt and type: `pip install flask stem pyinstaller pycrypto`
 * Go to http://www.riverbankcomputing.com/software/pyqt/download and download the latest PyQt4 for Windows for python 2.7, 32-bit (I downloaded `PyQt4-4.11-gpl-Py2.7-Qt4.8.6-x32.exe`), then install it.
 * Go to http://sourceforge.net/projects/pywin32/ and download and install the latest 32-bit pywin32 binary for python 2.7. I downloaded `pywin32-219.win32-py2.7.exe`.
 * Download and install the [Microsoft Visual C++ 2008 Redistributable Package (x86)](http://www.microsoft.com/en-us/download/details.aspx?id=29).
