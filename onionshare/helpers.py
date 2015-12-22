@@ -18,6 +18,7 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
 import os, inspect, hashlib, base64, hmac, platform, zipfile, tempfile
+from Crypto.Random import random
 from itertools import izip
 
 # hack to make unicode filenames work (#141)
@@ -52,16 +53,32 @@ def get_onionshare_dir():
     return onionshare_dir
 
 
+def get_path(folder, filename):
+    """
+    Returns the path of a filename.
+    folder is either 'html', 'locale', or 'share'
+    filename is the name of the specific file.
+    """
+    p = platform.system()
+    if p == 'Darwin':
+        prefix = os.path.join(osx_resources_dir, folder)
+    else:
+        prefix = get_onionshare_dir()
+    return os.path.join(prefix, filename)
+
+
 def get_html_path(filename):
     """
     Returns the path of the html files.
     """
-    p = platform.system()
-    if p == 'Darwin':
-        prefix = os.path.join(osx_resources_dir, 'html')
-    else:
-        prefix = get_onionshare_dir()
-    return os.path.join(prefix, filename)
+    return get_path('html', filename)
+
+
+def get_share_path(filename):
+    """
+    Returns the path of the share files.
+    """
+    return get_path('share', filename)
 
 
 def constant_time_compare(val1, val2):
@@ -94,6 +111,15 @@ def random_string(num_bytes, output_len=None):
     if not output_len:
         return s
     return s[:output_len]
+
+
+def build_slug():
+    """
+    Returns a random string made from two words from the wordlist, such as "deter-trig".
+    """
+    wordlist = open(get_share_path('wordlist'), 'r').read().split('\n')
+    wordlist.remove('')
+    return '-'.join(random.choice(wordlist) for x in range(2))
 
 
 def human_readable_filesize(b):
