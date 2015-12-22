@@ -10,3 +10,4 @@ include install/onionshare.appdata.xml
 include install/onionshare80.xpm
 include images/*.png
 include locale/*.json
+include share/wordlist

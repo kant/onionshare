@@ -91,7 +91,8 @@ if system == 'Linux':
             (os.path.join(sys.prefix, 'share/appdata'), ['install/onionshare.appdata.xml']),
             (os.path.join(sys.prefix, 'share/pixmaps'), ['install/onionshare80.xpm']),
             (os.path.join(sys.prefix, 'share/onionshare/images'), images),
-            (os.path.join(sys.prefix, 'share/onionshare/locale'), locale)
+            (os.path.join(sys.prefix, 'share/onionshare/locale'), locale),
+            (os.path.join(sys.prefix, 'share/onionshare'), ['share/wordlist']),
         ]
     )
 
@@ -105,7 +106,8 @@ elif system == 'Darwin':
         data_files=[
             ('images', images),
             ('locale', locale),
-            ('html', ['onionshare/index.html', 'onionshare/404.html'])
+            ('html', ['onionshare/index.html', 'onionshare/404.html']),
+            ('share', ['share/wordlist'])
         ],
         options={
             'py2app': {

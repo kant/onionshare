@@ -101,6 +101,8 @@ Section "install"
     File "${BINPATH}\locale\pt.json"
     File "${BINPATH}\locale\ru.json"
     File "${BINPATH}\locale\tr.json"
+    SetOutPath "$INSTDIR\share"
+    File "${BINPATH}\share\wordlist"
 
     # dependencies
     SetOutPath $INSTDIR
@@ -231,6 +233,7 @@ FunctionEnd
         Delete "$INSTDIR\locale\pt.json"
         Delete "$INSTDIR\locale\ru.json"
         Delete "$INSTDIR\locale\tr.json"
+        Delete "$INSTDIR\share\wordlist"
         Delete "$INSTDIR\qt4_plugins\accessible\qtaccessiblewidgets4.dll"
         Delete "$INSTDIR\qt4_plugins\graphicssystems\qglgraphicssystem4.dll"
         Delete "$INSTDIR\qt4_plugins\iconengines\qsvgicon4.dll"
@@ -277,6 +280,7 @@ FunctionEnd
         rmDir "$INSTDIR\onionshare_gui"
         rmDir "$INSTDIR\images"
         rmDir "$INSTDIR\locale"
+        rmDir "$INSTDIR\share"
         rmDir "$INSTDIR\Include"
         rmDir "$INSTDIR\qt4_plugins\accessible"
         rmDir "$INSTDIR\qt4_plugins\bearer"
