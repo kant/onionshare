@@ -72,6 +72,7 @@ REQUEST_DOWNLOAD = 1
 REQUEST_PROGRESS = 2
 REQUEST_OTHER = 3
 REQUEST_CANCELED = 4
+REQUEST_RATE_LIMIT = 4
 q = Queue.Queue()
 
 
@@ -89,6 +90,7 @@ def add_request(request_type, path, data=None):
 
 slug = helpers.build_slug()
 download_count = 0
+error404_count = 0
 
 stay_open = False
 def set_stay_open(new_stay_open):
@@ -243,6 +245,12 @@ def page_not_found(e):
     """
     404 error page.
     """
+    global error404_count
+    if request.path != '/favicon.ico':
+        error404_count += 1
+        if error404_count == 20:
+            add_request(REQUEST_RATE_LIMIT, request.path)
+
     add_request(REQUEST_OTHER, request.path)
     return render_template_string(open(helpers.get_html_path('404.html')).read())
 
